@@ -29,7 +29,12 @@
 		"type": "shell",
 		"inline": [
 			"sleep 30",
-			"sudo emerge --sync pentoo"
+			"sudo mkdir /etc/portage/package.accept_keywords",
+			"sudo bash -c \"echo 'pentoo/pentoo-installer **' >> /etc/portage/package.accept_keywords/pentoo-installer\"",
+			"sudo emerge --sync pentoo",
+			"sudo layman -f",
+			"yes | sudo layman -a wuodan",
+			"sudo emerge -1 pentoo-installer"
 		]
 	}],
 	"post-processors": ["vagrant"]
