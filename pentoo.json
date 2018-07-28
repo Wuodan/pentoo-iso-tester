@@ -1,0 +1,36 @@
+{
+	"builders": [{
+		"name" : "pentoo-vbox",
+		"type": "virtualbox-iso",
+		"guest_os_type": "Gentoo_64",
+		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC7.2.iso",
+		"iso_checksum": "70aec28a51977d96d855cdd7c10f1d8c01f67b729f85bdc3d98c8c10831b2add60e845d64d68e0c827791816bed9dbd64b7945b3477dbcb787d49eed8e0acb52",
+		"iso_checksum_type": "sha512",
+		"ssh_username": "pentoo",
+		"ssh_password": "pentoo",
+		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
+		"vboxmanage": [
+			["modifyvm", "{{.Name}}", "--firmware", "bios"],
+			["modifyvm", "{{.Name}}", "--memory", "4096"],
+			["modifyvm", "{{.Name}}", "--cpus", "2"]
+		],
+		"boot_wait" : "1m30s",
+		"boot_command" : [
+			"pentoo<enter><wait5>pentoo<enter><wait5>",
+			"sudo rc-service NetworkManager start<enter><wait10>",
+			"sudo rc-service sshd start<enter><wait10>"
+		],
+		"disk_size" : "65536",
+		"headless" : false,
+		"keep_registered" : false,
+		"skip_export" : false
+	}],
+	"provisioners": [{
+		"type": "shell",
+		"inline": [
+			"sleep 30",
+			"sudo emerge --sync pentoo"
+		]
+	}],
+	"post-processors": ["vagrant"]
+}
