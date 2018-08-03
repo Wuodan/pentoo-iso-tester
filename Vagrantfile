@@ -12,9 +12,10 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "packer_pentoo-vbox_virtualbox.box"
+  config.vm.box = "packer_pentoo-vbox-bios_virtualbox.box"
   config.ssh.username = "pentoo"
   config.ssh.password = "pentoo"
+  config.ssh.insert_key = false  
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
