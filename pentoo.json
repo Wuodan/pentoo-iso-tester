@@ -18,11 +18,65 @@
 			["modifyvm", "{{.Name}}", "--memory", "4096"],
 			["modifyvm", "{{.Name}}", "--cpus", "2"]
 		],
-		"boot_wait" : "1m0s",
+		"boot_wait" : "2m0s",
 		"boot_command" : [
 			"pentoo<enter><wait>pentoo<enter><wait>",
-			"sudo rc-service NetworkManager start<enter><wait>",
-			"sudo rc-service sshd start<enter><wait>"
+			"sudo rc-service sshd start<enter><wait>",
+			"sudo rc-service NetworkManager start<enter><wait>"
+		],
+		"disk_size" : "65536",
+		"headless" : false
+	},{
+		"name" : "pentoo-vbox-bios-minimal",
+		"type": "virtualbox-iso",
+		"guest_os_type": "Gentoo_64",
+		"hard_drive_interface": "sata",
+		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC7.2.iso",
+		"iso_checksum": "70aec28a51977d96d855cdd7c10f1d8c01f67b729f85bdc3d98c8c10831b2add60e845d64d68e0c827791816bed9dbd64b7945b3477dbcb787d49eed8e0acb52",
+		"iso_checksum_type": "sha512",
+		"ssh_username": "pentoo",
+		"ssh_password": "pentoo",
+		"ssh_host_port_max": "3619",
+		"ssh_host_port_min": "3619",
+		"ssh_pty" : "true",
+		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
+		"vboxmanage": [
+			["modifyvm", "{{.Name}}", "--firmware", "bios"],
+			["modifyvm", "{{.Name}}", "--memory", "1024"],
+			["modifyvm", "{{.Name}}", "--cpus", "1"]
+		],
+		"boot_wait" : "2m0s",
+		"boot_command" : [
+			"pentoo<enter><wait>pentoo<enter><wait>",
+			"sudo rc-service sshd start<enter><wait>",
+			"sudo rc-service NetworkManager start<enter><wait>"
+		],
+		"disk_size" : "65536",
+		"headless" : false
+	},{
+		"name" : "pentoo-vbox-bios-RC7.2_p20180730",
+		"type": "virtualbox-iso",
+		"guest_os_type": "Gentoo_64",
+		"hard_drive_interface": "sata",
+		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Beta/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC7.2_p20180730.iso",
+		"iso_checksum": "f035f721b8176cc036b7a4a9737023362cc9736664bf43e8868d196fae1ea2bde6ee80c52d8dc911e1f1bd23ba179e0ac3827544f9c999c699bcbb4f6f56f9da",
+		"iso_checksum_type": "sha512",
+		"ssh_username": "pentoo",
+		"ssh_password": "pentoo",
+		"ssh_host_port_max": "3620",
+		"ssh_host_port_min": "3620",
+		"ssh_pty" : "true",
+		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
+		"vboxmanage": [
+			["modifyvm", "{{.Name}}", "--firmware", "bios"],
+			["modifyvm", "{{.Name}}", "--memory", "4096"],
+			["modifyvm", "{{.Name}}", "--cpus", "2"]
+		],
+		"boot_wait" : "2m0s",
+		"boot_command" : [
+			"pentoo<enter><wait>pentoo<enter><wait>",
+			"sudo rc-service sshd start<enter><wait>",
+			"sudo rc-service NetworkManager start<enter><wait>"
 		],
 		"disk_size" : "65536",
 		"headless" : false
@@ -32,11 +86,13 @@
 		"inline": [
 			"sudo rc-update add NetworkManager default",
 			"sudo rc-update add sshd default",
+			"sudo emerge -1 --update layman",
+			"sudo layman -f",
 			"yes | sudo layman -a wuodan",
-			"sudo emerge -1 pentoo-installer",
+			"sudo ACCEPT_KEYWORDS='~amd64' emerge -1 '=pentoo/pentoo-installer-20180804'",
 			"sudo layman -d wuodan",
-			"echo 'partition:/dev/sda1:mountpoint:/boot:filesystem:fat32:crypttype::format:0:cryptname::partuuid:af336807-b8d5-b64e-9ae9-dd56a9d6cd00:cryptkey: partition:/dev/sda2:mountpoint:/:filesystem:ext4:crypttype::format:0:cryptname::partuuid:fb7022e5-2e60-de4f-bc37-3a010a600ee3:cryptkey: partition:/dev/sda3:mountpoint::filesystem:swap:crypttype::format:0:cryptname::partuuid:91196df6-91c9-a145-9b79-77e1faa3483e:cryptkey:' >> /tmp/pentoo-installer.config",
-			"sudo pentoo-installer /tmp/pentoo-installer.config"
+			"sudo pentoo-installer --headless",
+			"cat /tmp/pentoo-installer.log"
 		]
 	}],
 	"post-processors": ["vagrant"]
