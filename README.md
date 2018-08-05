@@ -1,4 +1,4 @@
-# pentoo-packer
+# Auto-install Pentoo
 These are setup files to auto-install Pentoo into severeal vbox VMs.
 All you have to run is:
 * packer build pentoo.json
@@ -36,3 +36,7 @@ sudo vagrant up`
 to debug the pentoo-installer, run:
 
 `sudo PACKER_LOG=1 packer build -on-error=ask pentoo.json 2>&1 | tee ~/packer-pentoo.log`
+
+## ToDo
+* Uefi: Can't boot anything by UEFI with packer/vagrant/vbox. It just shows the efi-shell, please help
+* Vagrant SSH: 'vagrant up' can't connect by ssh, but ssh is working in all other cases, even by vagrant.
