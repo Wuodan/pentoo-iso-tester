@@ -9,8 +9,6 @@
 		"iso_checksum_type": "sha512",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
-		"ssh_host_port_max": "3618",
-		"ssh_host_port_min": "3618",
 		"ssh_pty" : "true",
 		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
 		"vboxmanage": [
@@ -36,8 +34,6 @@
 		"iso_checksum_type": "sha512",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
-		"ssh_host_port_max": "3619",
-		"ssh_host_port_min": "3619",
 		"ssh_pty" : "true",
 		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
 		"vboxmanage": [
@@ -63,8 +59,6 @@
 		"iso_checksum_type": "sha512",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
-		"ssh_host_port_max": "3620",
-		"ssh_host_port_min": "3620",
 		"ssh_pty" : "true",
 		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
 		"vboxmanage": [
