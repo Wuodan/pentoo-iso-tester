@@ -17,9 +17,9 @@ These build steps are performed in parallel for each target VM.
 Target VMs may differ in cpu, ram, iso, etc.
 
 ## Requirements
-- Virtualbox
-- Packer
-- Vagrant
+- Virtualbox: app-emulation/virtualbox
+- Packer: app-emulation/packer 
+- Vagrant: app-emulation/vagrant
 - Temporarily about 40 GB of disk space for 3 parallel builds
 
 ## Useage detail
