@@ -31,8 +31,8 @@ Clone the repo, cd to the folder and run:
 sudo vagrant up;
 sudo vagrant up`
 
-## Useage detail
+## Debugging
 
-to debug the pentoo-installer, I run:
+to debug the pentoo-installer, run:
 
 `sudo PACKER_LOG=1 packer build -on-error=ask pentoo.json 2>&1 | tee ~/packer-pentoo.log`
