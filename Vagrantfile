@@ -10,11 +10,6 @@ Vagrant.configure("2") do |config|
     biosminimal.vm.hostname = 'biosminimal'
   end
 
-  config.vm.define "bios20180730" do |bios20180730|
-    bios20180730.vm.box = "packer_pentoo-vbox-bios-RC7.2_p20180730_virtualbox.box"
-    bios20180730.vm.hostname = 'bios20180730'
-  end
-
   config.ssh.username = "pentoo"
   config.ssh.password = "pentoo"
   config.ssh.insert_key = false

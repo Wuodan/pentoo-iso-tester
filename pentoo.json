@@ -4,8 +4,8 @@
 		"type": "virtualbox-iso",
 		"guest_os_type": "Gentoo_64",
 		"hard_drive_interface": "sata",
-		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC7.2.iso",
-		"iso_checksum": "70aec28a51977d96d855cdd7c10f1d8c01f67b729f85bdc3d98c8c10831b2add60e845d64d68e0c827791816bed9dbd64b7945b3477dbcb787d49eed8e0acb52",
+		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC8.iso",
+		"iso_checksum": "3b2c971fadc2c7155ee06d236820481eeb8b76926f2488a33ca9e3adc0989e4149e1e30e14f76309070cc7d8ebdbc5e9696270493deb8976fceccb81ed50c475",
 		"iso_checksum_type": "sha512",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
@@ -29,8 +29,8 @@
 		"type": "virtualbox-iso",
 		"guest_os_type": "Gentoo_64",
 		"hard_drive_interface": "sata",
-		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC7.2.iso",
-		"iso_checksum": "70aec28a51977d96d855cdd7c10f1d8c01f67b729f85bdc3d98c8c10831b2add60e845d64d68e0c827791816bed9dbd64b7945b3477dbcb787d49eed8e0acb52",
+		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC8.iso",
+		"iso_checksum": "3b2c971fadc2c7155ee06d236820481eeb8b76926f2488a33ca9e3adc0989e4149e1e30e14f76309070cc7d8ebdbc5e9696270493deb8976fceccb81ed50c475",
 		"iso_checksum_type": "sha512",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
@@ -49,31 +49,6 @@
 		],
 		"disk_size" : "65536",
 		"headless" : false
-	},{
-		"name" : "pentoo-vbox-bios-RC7.2_p20180730",
-		"type": "virtualbox-iso",
-		"guest_os_type": "Gentoo_64",
-		"hard_drive_interface": "sata",
-		"iso_url": "http://mirror.switch.ch/ftp/mirror/pentoo/Beta/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC7.2_p20180730.iso",
-		"iso_checksum": "f035f721b8176cc036b7a4a9737023362cc9736664bf43e8868d196fae1ea2bde6ee80c52d8dc911e1f1bd23ba179e0ac3827544f9c999c699bcbb4f6f56f9da",
-		"iso_checksum_type": "sha512",
-		"ssh_username": "pentoo",
-		"ssh_password": "pentoo",
-		"ssh_pty" : "true",
-		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
-		"vboxmanage": [
-			["modifyvm", "{{.Name}}", "--firmware", "bios"],
-			["modifyvm", "{{.Name}}", "--memory", "4096"],
-			["modifyvm", "{{.Name}}", "--cpus", "2"]
-		],
-		"boot_wait" : "2m0s",
-		"boot_command" : [
-			"pentoo<enter><wait>pentoo<enter><wait>",
-			"sudo rc-service sshd start<enter><wait>",
-			"sudo rc-service NetworkManager start<enter><wait>"
-		],
-		"disk_size" : "65536",
-		"headless" : false
 	}],
 	"provisioners": [{
 		"type": "shell",
@@ -83,12 +58,14 @@
 			"chmod 0600 ~/.ssh/authorized_keys",
 			"sudo rc-update add NetworkManager default",
 			"sudo rc-update add sshd default",
+			"echo 'GENTOO_MIRRORS=\"http://mirror.switch.ch/ftp/mirror/gentoo/ ftp://mirror.switch.ch/mirror/gentoo/\"' | sudo tee --append /etc/portage/make.conf",
 			"sudo emerge -1 --update layman",
 			"sudo layman -f",
 			"yes | sudo layman -a wuodan",
-			"sudo ACCEPT_KEYWORDS='~amd64' emerge -1 '=pentoo/pentoo-installer-20180804'",
+			"sudo ACCEPT_KEYWORDS='~amd64' USE=doc emerge -1 '=pentoo/pentoo-installer-20180805'",
 			"sudo layman -d wuodan",
-			"sudo pentoo-installer --headless",
+			"xzcat /usr/share/doc/pentoo-installer-20180805/config-samples/config.bios.msdos.json.xz > /tmp/config.bios.msdos.json",
+			"sudo pentoo-installer --headless --config-file /tmp/config.bios.msdos.json",
 			"cat /tmp/pentoo-installer.log"
 		]
 	}],
