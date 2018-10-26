@@ -30,6 +30,11 @@ Disk layout is according to one of the sample config files in the pentoo-install
 
 https://github.com/Wuodan/pentoo-installer/blob/config-file/config-samples/config.bios.msdos.json
 
+## Debugging
+Log is written to ./packer.log
+
+Packer builds with -on-error=ask, leaving the VM open for inspection if anything goes wrong.
+
 ## ToDo
 * Uefi: Can't boot anything by UEFI with packer/vagrant/vbox. It just shows the efi-shell, please help
 * Vagrant SSH: 'vagrant up' can't connect by ssh, but ssh is working in all other cases, even by vagrant.
