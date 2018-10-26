@@ -25,7 +25,9 @@ Target VMs may differ in cpu, ram, iso, etc.
 
 ## Config
 The pentoo.json config file contains 2 setups with different RAM/CPU settings which will be built in parallel.
+
 Disk layout is according to one of the sample config files in the pentoo-installer:
+
 https://github.com/Wuodan/pentoo-installer/blob/config-file/config-samples/config.bios.msdos.json
 
 ## ToDo
