@@ -5,7 +5,7 @@ All you have to run is:
 * ./pentoo-packer.sh [url-to-iso]
 * vagrant up
 
-_(vagrant up has to be run several times somehow, help is welcome!)_
+_(vagrant up has to be run several times sometimes, help is welcome!)_
 
 What the above 2 commands do is:
 1. Download ISO
@@ -15,7 +15,7 @@ What the above 2 commands do is:
 1. Boot from disk to installed Pentoo
 
 These build steps are performed in parallel for each target VM.
-Target VMs may differ in cpu, ram, iso, etc.
+Target VMs may differ in cpu, ram, disk layout, etc.
 
 ## Requirements
 - Virtualbox: app-emulation/virtualbox
@@ -26,7 +26,7 @@ Target VMs may differ in cpu, ram, iso, etc.
 ## Config
 The pentoo.json config file contains 2 setups with different RAM/CPU settings which will be built in parallel.
 
-Disk layout is according to one of the sample config files in the pentoo-installer:
+Disk layout is taken from one of the sample config files in the pentoo-installer:
 
 https://github.com/Wuodan/pentoo-installer/blob/config-file/config-samples/config.bios.msdos.json
 
