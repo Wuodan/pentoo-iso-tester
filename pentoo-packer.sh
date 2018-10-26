@@ -2,22 +2,20 @@
 
 set -e
 
-usage(){
-	echo "TODO"
-}
-
-parse_input(){
-	
-	echo "TODO"
-	return 0
-}
-
-parse_input "${@}" || (
-	usage
+if [ -z "$1" ]; then
+	printf "Supply http URL to iso. Example:\n" 2>&1
+	printf "\t./$(basename "$0") http://mirror.switch.ch/ftp/mirror/pentoo/Pentoo_amd64_hardened/pentoo-amd64-hardened-2018.0_RC8.iso\n" 2>&1
+	printf "The script will use the sha512 hash from the digests file.\n" 2>&1
 	exit 1
-)
+fi
 
+URL="$1"
 
-# curl -ls ftp://mirror.switch.ch/mirror/pentoo/Beta/Pentoo_amd64_hardened/ | grep '.iso$' | tail -n1
+ISO="$(basename "${URL}")"
+SHA512="$(curl -s "${URL}".DIGESTS | grep -A1 '^# SHA512' | grep '\.iso$' | grep -Eo '^[^ ]+')"
 
-PACKER_LOG=1 PACKER_LOG_PATH="$(dirname ${0})/packer.log" packer build -on-error=ask pentoo.json
+printf "Using iso: ${ISO}\n"
+printf "With SHA512: ${SHA512}\n"
+
+sed -e "s#URL#${URL}#g" -e "s#SHA512#${SHA512}#g" pentoo.json | \
+	PACKER_LOG=1 PACKER_LOG_PATH="$(dirname ${0})/packer.log" packer build -on-error=ask -
