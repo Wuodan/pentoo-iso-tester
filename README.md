@@ -2,7 +2,7 @@
 These are setup files to auto-install Pentoo into severeal vbox VMs.
 
 All you have to run is:
-* ./pentoo-packer.sh <url to iso>
+* ./pentoo-packer.sh [url-to-iso]
 * vagrant up
 
 _(vagrant up has to be run several times somehow, help is welcome!)_
