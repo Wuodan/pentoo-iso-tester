@@ -1,10 +1,11 @@
 # Auto-install Pentoo
 These are setup files to auto-install Pentoo into severeal vbox VMs.
+
 All you have to run is:
-* packer build pentoo.json
+* ./pentoo-packer.sh <url to iso>
 * vagrant up
 
-_(vagrant up has to be run 3 times somehow, help is welcome!)_
+_(vagrant up has to be run several times somehow, help is welcome!)_
 
 What the above 2 commands do is:
 1. Download ISO
@@ -22,20 +23,10 @@ Target VMs may differ in cpu, ram, iso, etc.
 - Vagrant: app-emulation/vagrant
 - Temporarily about 40 GB of disk space for 3 parallel builds
 
-## Useage detail
-Clone the repo, cd to the folder and run:
-
-`sudo packer build pentoo.json`
-
-`sudo vagrant up;
-sudo vagrant up;
-sudo vagrant up`
-
-## Debugging
-
-to debug the pentoo-installer, run:
-
-`sudo PACKER_LOG=1 packer build -on-error=ask pentoo.json 2>&1 | tee ~/packer-pentoo.log`
+## Config
+The pentoo.json config file contains 2 setups with different RAM/CPU settings which will be built in parallel.
+Disk layout is according to one of the sample config files in the pentoo-installer:
+https://github.com/Wuodan/pentoo-installer/blob/config-file/config-samples/config.bios.msdos.json
 
 ## ToDo
 * Uefi: Can't boot anything by UEFI with packer/vagrant/vbox. It just shows the efi-shell, please help
