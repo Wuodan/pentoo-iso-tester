@@ -58,14 +58,10 @@
 			"chmod 0600 ~/.ssh/authorized_keys",
 			"sudo rc-update add NetworkManager default",
 			"sudo rc-update add sshd default",
-			"echo 'GENTOO_MIRRORS=\"http://mirror.switch.ch/ftp/mirror/gentoo/ ftp://mirror.switch.ch/mirror/gentoo/\"' | sudo tee --append /etc/portage/make.conf",
-			"sudo emerge -1 --update layman",
-			"sudo layman -f",
-			"yes | sudo layman -a wuodan",
-			"sudo ACCEPT_KEYWORDS='~amd64' USE=doc emerge -1 '=pentoo/pentoo-installer-20180805'",
-			"sudo layman -d wuodan",
-			"xzcat /usr/share/doc/pentoo-installer-20180805/config-samples/config.bios.msdos.json.xz > /tmp/config.bios.msdos.json",
-			"sudo pentoo-installer --headless --config-file /tmp/config.bios.msdos.json",
+			"echo 'GENTOO_MIRRORS=\"http://mirror.netcologne.de/gentoo/ http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ http://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/\"' | sudo tee --append /etc/portage/make.conf",
+			"sudo emerge --sync pentoo",
+			"sudo ACCEPT_KEYWORDS='**' emerge -1 '=pentoo/pentoo-installer-99999999'",
+			"sudo pentoo-installer --headless --config-file /usr/config-samples/config.bios.msdos.json",
 			"cat /tmp/pentoo-installer.log"
 		]
 	}],
