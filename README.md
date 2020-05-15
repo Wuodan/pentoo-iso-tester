@@ -28,7 +28,7 @@ The pentoo.json config file contains 2 setups with different RAM/CPU settings wh
 
 Disk layout is taken from one of the sample config files in the pentoo-installer:
 
-https://github.com/Wuodan/pentoo-installer/blob/config-file/config-samples/config.bios.msdos.json
+https://github.com/pentoo/pentoo-installer/blob/master/share/pentoo-installer/config-samples/config.bios.msdos.json
 
 ## Debugging
 Log is written to ./packer.log
