@@ -19,7 +19,7 @@ Target VMs may differ in cpu, ram, disk layout, etc.
 
 ## Requirements
 - Virtualbox: app-emulation/virtualbox
-- Packer: app-emulation/packer 
+- Packer: dev-util/packer 
 - Vagrant: app-emulation/vagrant
 - Temporarily about 40 GB of disk space for 3 parallel builds
 
