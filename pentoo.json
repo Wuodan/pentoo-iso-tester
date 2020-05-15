@@ -61,7 +61,7 @@
 			"echo 'GENTOO_MIRRORS=\"http://mirror.netcologne.de/gentoo/ http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ http://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/\"' | sudo tee --append /etc/portage/make.conf",
 			"sudo emerge --sync pentoo",
 			"sudo ACCEPT_KEYWORDS='**' emerge -1 '=pentoo/pentoo-installer-99999999'",
-			"sudo pentoo-installer --headless --config-file /usr/config-samples/config.bios.msdos.json",
+			"sudo pentoo-installer --headless --config-file /usr/share/pentoo-installer/config-samples/config.bios.msdos.json",
 			"cat /tmp/pentoo-installer.log"
 		]
 	}],
