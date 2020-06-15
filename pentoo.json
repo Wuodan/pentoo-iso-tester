@@ -5,41 +5,17 @@
 		"guest_os_type": "Gentoo_64",
 		"hard_drive_interface": "sata",
 		"iso_url": "URL",
-		"iso_checksum": "SHA512",
-		"iso_checksum_type": "sha512",
+		"iso_checksum_type": "none",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
 		"ssh_pty" : "true",
 		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
+        "shutdown_timeout" : "10m0s",
+        "post_shutdown_delay" : "10m0s",
 		"vboxmanage": [
 			["modifyvm", "{{.Name}}", "--firmware", "bios"],
 			["modifyvm", "{{.Name}}", "--memory", "4096"],
 			["modifyvm", "{{.Name}}", "--cpus", "2"]
-		],
-		"boot_wait" : "2m0s",
-		"boot_command" : [
-			"pentoo<enter><wait>pentoo<enter><wait>",
-			"sudo rc-service sshd start<enter><wait>",
-			"sudo rc-service NetworkManager start<enter><wait>"
-		],
-		"disk_size" : "65536",
-		"headless" : false
-	},{
-		"name" : "pentoo-vbox-bios-minimal",
-		"type": "virtualbox-iso",
-		"guest_os_type": "Gentoo_64",
-		"hard_drive_interface": "sata",
-		"iso_url": "URL",
-		"iso_checksum": "SHA512",
-		"iso_checksum_type": "sha512",
-		"ssh_username": "pentoo",
-		"ssh_password": "pentoo",
-		"ssh_pty" : "true",
-		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
-		"vboxmanage": [
-			["modifyvm", "{{.Name}}", "--firmware", "bios"],
-			["modifyvm", "{{.Name}}", "--memory", "1024"],
-			["modifyvm", "{{.Name}}", "--cpus", "1"]
 		],
 		"boot_wait" : "2m0s",
 		"boot_command" : [
@@ -60,9 +36,14 @@
 			"sudo rc-update add sshd default",
 			"echo 'GENTOO_MIRRORS=\"http://mirror.netcologne.de/gentoo/ http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ http://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/\"' | sudo tee --append /etc/portage/make.conf",
 			"sudo emerge --sync pentoo",
+            "# TODO: remove next line once https://github.com/pentoo/pentoo-livecd/issues/37 is fixed",
+            "sudo chown root:portage /var/cache/distfiles && sudo chmod g+w /var/cache/distfiles",
 			"sudo ACCEPT_KEYWORDS='**' emerge -1 '=pentoo/pentoo-installer-99999999'",
 			"sudo pentoo-installer --headless --config-file /usr/share/pentoo-installer/config-samples/config.bios.msdos.json",
-			"cat /tmp/pentoo-installer.log"
+			"cat /tmp/pentoo-installer.log",
+            "sleep 30",
+            "sync || sync || sync",
+            "sleep 30"
 		]
 	}],
 	"post-processors": ["vagrant"]
