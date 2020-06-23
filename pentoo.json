@@ -5,13 +5,11 @@
 		"guest_os_type": "Gentoo_64",
 		"hard_drive_interface": "sata",
 		"iso_url": "URL",
-		"iso_checksum_type": "none",
+		"iso_checksum": "none",
 		"ssh_username": "pentoo",
 		"ssh_password": "pentoo",
 		"ssh_pty" : "true",
 		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
-        "shutdown_timeout" : "10m0s",
-        "post_shutdown_delay" : "10m0s",
 		"vboxmanage": [
 			["modifyvm", "{{.Name}}", "--firmware", "bios"],
 			["modifyvm", "{{.Name}}", "--memory", "4096"],
@@ -29,9 +27,6 @@
 	"provisioners": [{
 		"type": "shell",
 		"inline": [
-			"mkdir -p ~/.ssh",
-			"curl -sS https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub >> ~/.ssh/authorized_keys",
-			"chmod 0600 ~/.ssh/authorized_keys",
 			"sudo rc-update add NetworkManager default",
 			"sudo rc-update add sshd default",
 			"echo 'GENTOO_MIRRORS=\"http://mirror.netcologne.de/gentoo/ http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ http://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/\"' | sudo tee --append /etc/portage/make.conf",
@@ -40,10 +35,7 @@
             "sudo chown root:portage /var/cache/distfiles && sudo chmod g+w /var/cache/distfiles",
 			"sudo ACCEPT_KEYWORDS='**' emerge -1 '=pentoo/pentoo-installer-99999999'",
 			"sudo pentoo-installer --headless --config-file /usr/share/pentoo-installer/config-samples/config.bios.msdos.json",
-			"cat /tmp/pentoo-installer.log",
-            "sleep 30",
-            "sync || sync || sync",
-            "sleep 30"
+			"cat /tmp/pentoo-installer.log"
 		]
 	}],
 	"post-processors": ["vagrant"]

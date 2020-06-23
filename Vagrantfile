@@ -5,14 +5,12 @@ Vagrant.configure("2") do |config|
     bios.vm.hostname = 'bios'
   end
 
-  config.vm.define "biosminimal" do |biosminimal|
-    biosminimal.vm.box = "packer_pentoo-vbox-bios-minimal_virtualbox.box"
-    biosminimal.vm.hostname = 'biosminimal'
-  end
+  # config.vm.network "private_network", type: "dhcp"
+  config.vm.network "private_network", ip: "192.168.33.10"
 
-  config.ssh.username = "pentoo"
-  config.ssh.password = "pentoo"
-  config.ssh.insert_key = false
+  # config.ssh.username = "pentoo"
+  # config.ssh.password = "pentoo"
+  # config.ssh.insert_key = true
   config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 
   config.vm.provider "virtualbox" do |vb|
