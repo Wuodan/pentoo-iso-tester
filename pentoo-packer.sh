@@ -31,7 +31,8 @@ fi
 
 URL="$1"
 ISO="$(basename "${URL}")"
-BLAKE2="$(curl -s "${URL}".DIGESTS | grep -A1 '^# BLAKE2' | grep '\.iso$' | grep -Eo '^[^ ]+')"
+# BLAKE2="$(curl -s "${URL}".DIGESTS | grep -A1 '^# BLAKE2' | grep '\.iso$' | grep -Eo '^[^ ]+')"
+BLAKE2=
 
 printf "Using iso: ${ISO}\n"
 printf "With BLAKE2 hash: ${BLAKE2}\n"
