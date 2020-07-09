@@ -8,10 +8,8 @@ Vagrant.configure("2") do |config|
   # config.vm.network "private_network", type: "dhcp"
   config.vm.network "private_network", ip: "192.168.33.10"
 
-  # config.ssh.username = "pentoo"
-  # config.ssh.password = "pentoo"
   # config.ssh.insert_key = true
-  config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
+  # config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
