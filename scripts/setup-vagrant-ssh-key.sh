@@ -15,14 +15,14 @@ ROOT_PARTITION="$(cat "${CONFIG_FILE}" | "${DIR}"/find-root-partition.sh)"
 # user name of the pentoo installation (default=pentoo)
 USERNAME="$(cat "${CONFIG_FILE}" | "${DIR}"/find-username.sh)"
 # target file for Vagrants insecure public key
-FILE_AUTH_KEYS="/mnt/gentoo/home/${USERNAME}/.ssh/authorized_keys"
+FILE_AUTH_KEYS="/home/${USERNAME}/.ssh/authorized_keys"
 
 # mount root partition and add Vagrant insecure public key
 sudo mkdir -p /mnt/gentoo
 sudo mount "${ROOT_PARTITION}" /mnt/gentoo
 
 # download insecure vagrant public key to ~/.ssh/authorized_keys
-wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O "${FILE_AUTH_KEYS}"
+sudo chroot /mnt/gentoo wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub -O "${FILE_AUTH_KEYS}"
 # set permissions and ownership
-chmod 600 "${FILE_AUTH_KEYS}"
-chown "${USERNAME}":users "${FILE_AUTH_KEYS}"
+sudo chroot /mnt/gentoo chmod 600 "${FILE_AUTH_KEYS}"
+sudo chroot /mnt/gentoo chown "${USERNAME}":users "${FILE_AUTH_KEYS}"
