@@ -27,12 +27,12 @@
 	"provisioners": [{
         "type": "file",
         "source": "scripts",
-        "destination": "/tmp/pentoo-packer-scripts"
+        "destination": "/tmp/pentoo-iso-tester"
     },{
 		"type": "shell",
 		"inline": [
-            "/tmp/pentoo-packer-scripts/install-pentoo.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'",
-            "/tmp/pentoo-packer-scripts/setup-vagrant-ssh-key.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'"
+            "/tmp/pentoo-iso-tester/install-pentoo.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'",
+            "/tmp/pentoo-iso-tester/setup-vagrant-ssh-key.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'"
 		]
 	}],
 	"post-processors": ["vagrant"]
