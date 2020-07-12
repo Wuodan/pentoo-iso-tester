@@ -11,9 +11,9 @@
 set -eu
 
 # read username from config file
-USERNAME="$(jq -j '.username')"
+USERNAME="$(jq -j '.username // empty')"
 # if not set use default=pentoo
-if [[ "${USERNAME}" == 'null' ]]; then
+if [[ -z "${USERNAME}" ]]; then
     USERNAME='pentoo'
 fi
 printf '%s' "${USERNAME}"
