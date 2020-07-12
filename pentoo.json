@@ -1,39 +1,39 @@
 {
-	"builders": [{
-		"name" : "pentoo-vbox-bios",
-		"type": "virtualbox-iso",
-		"guest_os_type": "Gentoo_64",
-		"hard_drive_interface": "sata",
-		"iso_url": "URL",
-		"iso_checksum": "none",
-		"ssh_username": "pentoo",
-		"ssh_password": "pentoo",
-		"ssh_pty" : "true",
-		"shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
-		"vboxmanage": [
-			["modifyvm", "{{.Name}}", "--firmware", "bios"],
-			["modifyvm", "{{.Name}}", "--memory", "4096"],
-			["modifyvm", "{{.Name}}", "--cpus", "2"]
-		],
-		"boot_wait" : "2m0s",
-		"boot_command" : [
-			"pentoo<enter><wait>pentoo<enter><wait>",
-			"sudo rc-service sshd start<enter><wait>",
-			"sudo rc-service NetworkManager start<enter><wait>"
-		],
-		"disk_size" : "65536",
-		"headless" : false
-	}],
-	"provisioners": [{
+    "builders": [{
+        "name" : "pentoo-vbox-bios",
+        "type": "virtualbox-iso",
+        "guest_os_type": "Gentoo_64",
+        "hard_drive_interface": "sata",
+        "iso_url": "URL",
+        "iso_checksum": "none",
+        "ssh_username": "pentoo",
+        "ssh_password": "pentoo",
+        "ssh_pty" : "true",
+        "shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
+        "vboxmanage": [
+            ["modifyvm", "{{.Name}}", "--firmware", "bios"],
+            ["modifyvm", "{{.Name}}", "--memory", "4096"],
+            ["modifyvm", "{{.Name}}", "--cpus", "2"]
+        ],
+        "boot_wait" : "2m0s",
+        "boot_command" : [
+            "pentoo<enter><wait>pentoo<enter><wait>",
+            "sudo rc-service sshd start<enter><wait>",
+            "sudo rc-service NetworkManager start<enter><wait>"
+        ],
+        "disk_size" : "65536",
+        "headless" : false
+    }],
+    "provisioners": [{
         "type": "file",
         "source": "scripts",
         "destination": "/tmp/pentoo-iso-tester"
     },{
-		"type": "shell",
-		"inline": [
+        "type": "shell",
+        "inline": [
             "/tmp/pentoo-iso-tester/install-pentoo.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'",
             "/tmp/pentoo-iso-tester/setup-vagrant-ssh-key.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'"
-		]
-	}],
-	"post-processors": ["vagrant"]
+        ]
+    }],
+    "post-processors": ["vagrant"]
 }
