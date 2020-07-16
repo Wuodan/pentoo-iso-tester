@@ -4,7 +4,7 @@
 # input is json from stdin
 # output is the root partition
 # example usage:
-# cat config-file.json | ./find-root-partition.sh
+# < config-file.json ./find-root-partition.sh
 # example output:
 # /dev/sda3
 
