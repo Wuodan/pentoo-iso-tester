@@ -31,9 +31,13 @@
     },{
         "type": "shell",
         "inline": [
-            "/tmp/pentoo-iso-tester/install-pentoo.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'",
-            "/tmp/pentoo-iso-tester/setup-vagrant-ssh-key.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'"
+            "/tmp/pentoo-iso-tester/install-pentoo.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'"
         ]
+    },{
+        "type": "file",
+        "source": "/tmp/pentoo-installer.log",
+        "destination": "log/pentoo-installer.log",
+        "direction": "download"
     }],
     "post-processors": ["vagrant"]
 }
