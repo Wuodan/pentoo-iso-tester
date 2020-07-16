@@ -11,9 +11,6 @@ CONFIG_FILE="${1}"
 # TODO: remove next line once https://github.com/pentoo/pentoo-livecd/issues/37 is fixed
 sudo chown root:portage /var/cache/distfiles && sudo chmod g+w /var/cache/distfiles
 
-sudo rc-update add NetworkManager default
-sudo rc-update add sshd default
-
 sudo sh -c "echo 'GENTOO_MIRRORS=\"http://mirror.netcologne.de/gentoo/ http://linux.rz.ruhr-uni-bochum.de/download/gentoo-mirror/ http://ftp-stud.hs-esslingen.de/pub/Mirrors/gentoo/\"' >> /etc/portage/make.conf"
 
 # setup wuodan repository
