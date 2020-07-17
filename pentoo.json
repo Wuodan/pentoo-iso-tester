@@ -25,13 +25,22 @@
         "headless" : false
     }],
     "provisioners": [{
+        "type": "shell",
+        "inline": [
+            "mkdir /tmp/pentoo-iso-tester"
+        ]
+    },{
         "type": "file",
-        "source": "scripts",
-        "destination": "/tmp/pentoo-iso-tester"
+        "source": "script",
+        "destination": "/tmp/pentoo-iso-tester/script"
+    },{
+        "type": "file",
+        "source": "config",
+        "destination": "/tmp/pentoo-iso-tester/config"
     },{
         "type": "shell",
         "inline": [
-            "/tmp/pentoo-iso-tester/install-pentoo.sh '/usr/share/pentoo-installer/config-samples/config.bios.msdos.json'"
+            "/tmp/pentoo-iso-tester/script/install-pentoo.sh '/tmp/pentoo-iso-tester/config/config.bios.msdos.json'"
         ]
     },{
         "type": "file",
