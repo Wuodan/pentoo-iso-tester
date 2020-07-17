@@ -14,8 +14,8 @@
 	"#": "optional",
 	"#": "each of these commands will be executed before the installer exits",
 	"post_installation_commands":[
-		"/tmp/pentoo-iso-tester/setup-vagrant-ssh-key.sh \"${DESTDIR}\" \"${INSTALLER_CONFIGFILE}\"",
-		"/tmp/pentoo-iso-tester/activate-sshd.sh \"${DESTDIR}\""
+		"/tmp/pentoo-iso-tester/script/setup-vagrant-ssh-key.sh \"${DESTDIR}\" \"${INSTALLER_CONFIGFILE}\"",
+		"/tmp/pentoo-iso-tester/script/activate-sshd.sh \"${DESTDIR}\""
 	],
 
 	"#": "required",

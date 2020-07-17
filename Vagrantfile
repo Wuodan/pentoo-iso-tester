@@ -1,8 +1,8 @@
 Vagrant.configure("2") do |config|
 
-  config.vm.define "bios" do |bios|
-    bios.vm.box = "packer_pentoo-vbox-bios_virtualbox.box"
-    bios.vm.hostname = 'bios'
+  config.vm.define "efi" do |efi|
+    efi.vm.box = "packer_pentoo-vbox-efi.box"
+    efi.vm.hostname = 'efi'
   end
 
   # config.vm.network "private_network", type: "dhcp"
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
     # vb.cpus = "2"
-    # vb.firmware = "bios"
+    # vb.firmware = "efi"
     vb.gui = true
     # vb.memory = "4096"
   end
