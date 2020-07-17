@@ -1,6 +1,6 @@
 {
     "builders": [{
-        "name" : "pentoo-vbox-bios",
+        "name" : "pentoo-vbox-efi",
         "type": "virtualbox-iso",
         "guest_os_type": "Gentoo_64",
         "hard_drive_interface": "sata",
@@ -11,7 +11,7 @@
         "ssh_pty" : "true",
         "shutdown_command": "echo 'pentoo' | sudo -S shutdown -P now",
         "vboxmanage": [
-            ["modifyvm", "{{.Name}}", "--firmware", "bios"],
+            ["modifyvm", "{{.Name}}", "--firmware", "efi"],
             ["modifyvm", "{{.Name}}", "--memory", "4096"],
             ["modifyvm", "{{.Name}}", "--cpus", "2"]
         ],
@@ -40,7 +40,7 @@
     },{
         "type": "shell",
         "inline": [
-            "/tmp/pentoo-iso-tester/script/install-pentoo.sh '/tmp/pentoo-iso-tester/config/config.bios.msdos.json'"
+            "/tmp/pentoo-iso-tester/script/install-pentoo.sh '/tmp/pentoo-iso-tester/config/config.efi.msdos.json'"
         ]
     },{
         "type": "file",
