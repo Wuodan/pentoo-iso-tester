@@ -1,3 +1,4 @@
+pentoo/pentoo-iso-tester **
 dev-util/packer ~amd64
 app-emulation/vagrant ~amd64
 # needed by vagrant
